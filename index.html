@@ -129,14 +129,15 @@
   }
   h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(70px, 12vw, 160px);
+    font-size: clamp(56px, 12vw, 160px);
     line-height: 0.9; letter-spacing: -2px;
     position: relative; z-index: 1;
     opacity: 0; transform: translateY(40px);
     animation: fadeUp 1s 0.4s forwards;
+    word-break: break-word;
   }
   h1 .accent { color: var(--orange); display: block; }
-  h1 .sub { font-size: clamp(30px, 5vw, 60px); color: var(--muted); display: block; }
+  h1 .sub { font-size: clamp(16px, 4.5vw, 60px); color: var(--muted); display: block; letter-spacing: 1px; }
   .hero-desc {
     max-width: 560px; margin: 28px auto 48px;
     font-size: 18px; line-height: 1.7; color: var(--muted);
@@ -505,6 +506,16 @@
   ::-webkit-scrollbar-track { background: var(--dark); }
   ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
 
+  /* ─── COMPETITIVE TABLE MOBILE SCROLL ─── */
+  .comp-wrap { overflow-x: auto; }
+  .comp-table { min-width: 520px; }
+
+  /* ─── HIDE CURSOR ON TOUCH ─── */
+  @media (hover: none) {
+    body { cursor: auto; }
+    .cursor-dot, .cursor-ring { display: none; }
+  }
+
   /* ─── HORIZONTAL SCROLL PROGRESS ─── */
   .progress-bar {
     position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 200;
@@ -517,19 +528,74 @@
 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
+    /* Nav */
+    nav { padding: 14px 20px; }
     .nav-links { display: none; }
-    section { padding: 80px 24px; }
+    .nav-cta { padding: 8px 16px; font-size: 11px; }
+
+    /* Sections */
+    section { padding: 70px 20px !important; }
+
+    /* Hero */
+    #hero { padding: 120px 20px 80px !important; }
+    h1 { font-size: clamp(52px, 14vw, 90px); letter-spacing: -1px; }
+    h1 .sub { font-size: clamp(14px, 5vw, 22px); letter-spacing: 1px; margin-top: 8px; }
+    .hero-desc { font-size: 15px; margin: 20px auto 36px; padding: 0 4px; }
+    .hero-actions { flex-direction: column; align-items: center; gap: 12px; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 300px; text-align: center; padding: 14px 24px; font-size: 13px; }
+    .hero-stats { gap: 24px; margin-top: 48px; }
+    .stat-num { font-size: 38px; }
+    .stat-label { font-size: 10px; }
+    .hero-badge { font-size: 10px; letter-spacing: 1px; padding: 6px 14px; }
+
+    /* Problem */
     .problem-grid, .solution-header { grid-template-columns: 1fr; }
+    .problem-visual { display: none; }
+    .section-title { font-size: clamp(32px, 9vw, 60px) !important; }
+
+    /* Solution */
     .features-grid { grid-template-columns: 1fr; }
+
+    /* Who it's for */
     .trades-grid { grid-template-columns: 1fr !important; }
-    .market-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Market */
+    .market-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .mc-num { font-size: clamp(36px, 10vw, 60px) !important; }
+
+    /* Financials */
     .fin-grid { grid-template-columns: 1fr; }
-    .road-grid { grid-template-columns: repeat(2, 1fr); }
-    .expand-cards { grid-template-columns: 1fr; }
+    .fin-rev { font-size: 48px !important; }
+
+    /* Competitive table */
+    .comp-table { font-size: 12px; }
+    .comp-table th, .comp-table td { padding: 10px 8px; }
+
+    /* Roadmap */
+    .road-grid { grid-template-columns: 1fr !important; }
+
+    /* Founder */
     .founder-wrap { grid-template-columns: 1fr; text-align: center; }
+    .expand-cards { grid-template-columns: 1fr; }
+
+    /* Footer */
     footer { flex-direction: column; gap: 16px; text-align: center; }
-    .hero-stats { gap: 32px; }
+
+    /* General text */
+    p { font-size: 14px !important; }
+    .workflow-step { flex-direction: column; }
+    .ws-num { width: 40px; height: 40px; font-size: 16px; }
+
+    /* Ticker */
+    .ticker-item { font-size: 13px; }
+  }
+
+  /* ─── SMALL MOBILE (≤400px) ─── */
+  @media (max-width: 400px) {
+    h1 { font-size: 48px; }
+    h1 .sub { font-size: 13px; }
+    .market-grid { grid-template-columns: 1fr; }
+    .road-grid { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -566,7 +632,7 @@
     <span class="sub">Copilot for Every Physical Worker</span>
   </h1>
   <p class="hero-desc">
-    <strong>Real-time AI guidance</strong> for mechanics, doctors, electricians, construction workers, factory operators — anyone who works with their hands. Starting with India's massive physical workforce.
+    <strong>Real-time AI guidance</strong> for mechanics, doctors, electricians, factory operators — anyone who works with their hands. Starting with India's massive physical workforce.
   </p>
   <div class="hero-actions">
     <a href="#solution" class="btn-primary">See How It Works</a>
@@ -599,7 +665,6 @@
     <div class="ticker-item"><span class="dot">◆</span> Mechanics</div>
     <div class="ticker-item"><span class="dot">◆</span> Doctors & Paramedics</div>
     <div class="ticker-item"><span class="dot">◆</span> Electricians</div>
-    <div class="ticker-item"><span class="dot">◆</span> Construction Workers</div>
     <div class="ticker-item"><span class="dot">◆</span> Factory Operators</div>
     <div class="ticker-item"><span class="dot">◆</span> HVAC Technicians</div>
     <div class="ticker-item"><span class="dot">◆</span> Plumbers</div>
@@ -610,7 +675,6 @@
     <div class="ticker-item"><span class="dot">◆</span> Mechanics</div>
     <div class="ticker-item"><span class="dot">◆</span> Doctors & Paramedics</div>
     <div class="ticker-item"><span class="dot">◆</span> Electricians</div>
-    <div class="ticker-item"><span class="dot">◆</span> Construction Workers</div>
     <div class="ticker-item"><span class="dot">◆</span> Factory Operators</div>
     <div class="ticker-item"><span class="dot">◆</span> HVAC Technicians</div>
     <div class="ticker-item"><span class="dot">◆</span> Plumbers</div>
@@ -640,7 +704,7 @@
           <div class="pp-num">02</div>
           <div class="pp-text">
             <h4>Months of Training Required</h4>
-            <p>Across every physical trade, new workers take months or years before they can work independently.</p>
+            <p>Across every physical profession, new workers take months or years before they can work independently.</p>
           </div>
         </div>
         <div class="problem-point reveal reveal-delay-4">
@@ -719,7 +783,7 @@
 <section id="who" style="background:var(--dark3);padding:100px 60px;">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="section-label reveal">Who It's For</div>
-    <h2 class="section-title reveal reveal-delay-1">Built for <span class="hl">Every</span><br>Physical Trade.</h2>
+    <h2 class="section-title reveal reveal-delay-1">Built for <span class="hl">Every</span><br>Physical Work.</h2>
     <p class="reveal reveal-delay-2" style="color:var(--muted);font-size:16px;line-height:1.8;max-width:600px;margin-bottom:60px;">
       If the job requires physical presence, skilled hands, and critical decisions on-site — Guidon AI is built for it. Starting with mechanics, expanding to every field.
     </p>
@@ -743,11 +807,6 @@
         <div style="font-size:13px;color:var(--muted);line-height:1.7;">Wiring diagrams, fault diagnosis, safety checklists — AI-guided from inspection to completion.</div>
       </div>
 
-      <div class="trade-card reveal reveal-delay-3" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;transition:all 0.3s;">
-        <div style="font-size:40px;margin-bottom:16px;">🏗️</div>
-        <div style="font-size:17px;font-weight:700;color:var(--white);margin-bottom:8px;">Construction Workers</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.7;">Structural procedures, safety compliance, material guidance, and quality checks at every build stage.</div>
-      </div>
 
       <div class="trade-card reveal reveal-delay-4" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;transition:all 0.3s;">
         <div style="font-size:40px;margin-bottom:16px;">🏭</div>
@@ -769,7 +828,7 @@
 <section id="workflow">
   <div class="workflow-wrap">
     <div class="section-label reveal">How It Works — Example: Mechanic</div>
-    <h2 class="section-title reveal reveal-delay-1">Same Flow,<br><span class="hl">Any Trade.</span></h2>
+    <h2 class="section-title reveal reveal-delay-1">Same Flow,<br><span class="hl">Any Work.</span></h2>
     <p class="reveal reveal-delay-2" style="color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:48px;max-width:580px;">
       Whether you're a doctor running a procedure checklist or an electrician tracing a fault — the interaction is identical. Speak the problem. Get guided. Do the work.
     </p>
@@ -794,7 +853,7 @@
         <div class="ws-num">3</div>
         <div class="ws-content">
           <h3>AI Asks Smart Follow-Up Questions</h3>
-          <p>Contextual questions narrow down the exact issue. For a mechanic: "Any fuel? Battery working?" For a paramedic: "Duration of pain? Any radiation to arm?"</p>
+          <p>Contextual questions narrow down the exact issue. For a mechanic: "Is the engine cranking? Battery showing charge?" For a paramedic: "Duration of pain? Any radiation to arm?"</p>
           <span class="ws-tag">AI Diagnosis Engine</span>
         </div>
       </div>
@@ -803,7 +862,7 @@
         <div class="ws-content">
           <h3>Real-Time Guided Execution</h3>
           <p>Step-by-step instructions delivered in real time. The worker follows, the AI adapts. Errors drop. Speed increases. Anyone can perform at an expert level.</p>
-          <span class="ws-tag">Guided Workflow · Any Trade</span>
+          <span class="ws-tag">Guided Workflow · Any Work</span>
         </div>
       </div>
     </div>
@@ -829,8 +888,8 @@
         <div class="mc-label">EV market growth rate driving new technical complexity for workers</div>
       </div>
       <div class="market-card reveal reveal-delay-3">
-        <div class="mc-num">$0</div>
-        <div class="mc-label">Affordable mobile-first AI tools for physical workers in the field today</div>
+        <div class="mc-num">$1<span class="mc-unit">B+</span></div>
+        <div class="mc-label">Market value of AI tools for physical workers — virtually untapped in India today</div>
       </div>
     </div>
     <div style="margin-top:60px;padding:32px;background:var(--card);border:1px solid rgba(255,92,26,0.3);border-radius:12px;" class="reveal">
@@ -839,11 +898,10 @@
         <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">🔧 Mechanics</span>
         <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">🩺 Doctors & Paramedics</span>
         <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">⚡ Electricians</span>
-        <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">🏗️ Construction Workers</span>
         <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">🏭 Factory Operators</span>
         <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">❄️ HVAC Technicians</span>
         <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">🔩 Plumbers</span>
-        <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">+ Any Physical Trade</span>
+        <span style="background:rgba(255,255,255,0.05);padding:8px 18px;border-radius:20px;font-size:14px;color:var(--text);">+ Any Physical Work</span>
       </div>
     </div>
   </div>
@@ -877,7 +935,7 @@
         <div class="fin-arrow">🔥</div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;" class="reveal">
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;margin-top:24px;" class="reveal">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;">
         <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:16px;">PRICING MODEL</div>
         <div style="display:flex;flex-direction:column;gap:16px;">
@@ -890,11 +948,6 @@
             <span style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--orange);">₹1,999/mo</span>
           </div>
         </div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;">
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:16px;">MVP BUILD COST</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--white);line-height:1;margin-bottom:8px;">₹10K–₹50K</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.6;">Low initial build cost. High software margins. Lean SaaS from day one.</p>
       </div>
     </div>
   </div>
@@ -943,7 +996,7 @@
         </tr>
         <tr class="us-row">
           <td>Guidon AI ◆</td>
-          <td>All physical workers, India</td>
+          <td>AI guidance for all physical workers, India</td>
           <td><span class="check">✓</span></td>
           <td><span class="check">✓</span></td>
           <td><span class="check">✓</span></td>
@@ -996,7 +1049,7 @@
       "Anyone should be able to perform <span>skilled work</span> with AI guidance."
     </div>
     <p class="reveal reveal-delay-2" style="color:var(--muted);font-size:17px;line-height:1.8;max-width:600px;margin:0 auto 60px;">
-      Physical workers deserve the same AI advantage that knowledge workers already have. Guidon AI is the beginning of that shift.
+      Physical workers deserve the AI guidance that knowledge workers already have. Guidon AI is the beginning of that shift.
     </p>
     <div class="expand-cards">
       <div class="expand-card reveal">
